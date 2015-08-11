@@ -1,0 +1,51 @@
+EVOLUTION LAW ONLINE MANAGER
+
+
+###DB
+
+######users
+	user_id serial NOT NULL,
+	type [client, staff]
+	entity_type [company, individual, partnership]
+	active bool default true,
+	pending bool default true,
+	active boolean NOT NULL DEFAULT true,
+	address_id
+	CONSTRAINT user_pkey PRIMARY KEY (id)
+
+######address
+  id serial NOT NULL,
+  line_1 character varying(255),
+  line_2 character varying(255),
+  city character varying(255) NOT NULL,
+  state character varying(255),
+  iso3166_country character varying(2) NOT NULL,
+  CONSTRAINT address_pkey PRIMARY KEY (id)
+
+######phone
+  id serial NOT NULL,	
+  type [home, work, mobile]
+  number string,
+  user_id,
+  CONSTRAINT phone_pkey PRIMARY KEY (id)
+
+
+######billing
+  id serial NOT NULL,
+  period character varying(255) NOT NULL,
+  address_id integer,
+  dps_billing_token character varying(16) NOT NULL DEFAULT 'xxxxxxxxxxxxxxxx'::character varying,
+
+
+
+######events
+	user_id fk
+
+######matters
+	user_id fk
+
+######documents
+	user_id fk
+
+######invoices
+	user_id pk
