@@ -29,14 +29,12 @@ module.exports.bootstrap = function(cb) {
 	});
 
 
-	testAccounts = loadUsers
+	loadUsers
 		.then(function(){
 			sails.models.user.find({}).exec(function findCB(err, found){
 			  while (found.length)
 			    console.log('Found User with name ' + found.pop().name)
 			});
-		});
-
-	Promise.join(loadUsers, testAccounts)
+		})
 		.then(cb)
 };

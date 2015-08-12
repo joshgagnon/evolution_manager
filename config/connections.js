@@ -47,8 +47,11 @@ module.exports.connections = {
     user: 'josh',
     password: '',
     database: 'evolution_manager'
-  }
+  },
 
+  test: {
+    adapter: 'sails-memory'
+  }
 
   /***************************************************************************
   *                                                                          *
