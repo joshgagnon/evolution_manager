@@ -20,6 +20,7 @@ before(function(done) {
         }
     }, function(err, server) {
         sails = server;
+        sails.log.info('Sails Lifted');
         if (err) return done(err);
         var barrels = new Barrels();
         // Populate the DB

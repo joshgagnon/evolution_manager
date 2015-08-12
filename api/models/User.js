@@ -65,16 +65,15 @@ module.exports = {
         },
         verifyPassword: function(password) {
             return bcrypt.compareAsync(password, this.password)
-                .then(function(){
+               .then(function(result){
+                    if(!result) throw 'failed';
                     return this;
                 }.bind(this));
         },
 
-        changePassword: function(newPassword, cb) {
+        changePassword: function(newPassword) {
             this.newPassword = newPassword;
-            this.save(function(err, u) {
-                return cb(err, u);
-            });
+            return this.save();
         },
 
         toJSON: function() {
@@ -95,10 +94,8 @@ module.exports = {
         if (attrs.newPassword) {
             bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
                 if (err) return cb(err);
-
                 bcrypt.hash(attrs.newPassword, salt, function(err, crypted) {
                     if (err) return cb(err);
-
                     delete attrs.newPassword;
                     attrs.password = crypted;
                     return cb();

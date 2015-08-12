@@ -1,21 +1,49 @@
-describe.only('UsersModel', function() {
 
-    describe('#find()', function() {
+
+describe.only('Users Model', function() {
+    describe('Find an Admin, verify Password', function() {
+        var admin;
         it('should have more than 0 entries', function(done) {
             User.find()
                 .then(function(users) {
                     users.length.should.not.be.eql(0);
-                    var admin = _.findWhere(users, {name: 'josh'});
-                    admin.accountType.should.be.eql('admin');
-                    admin.password.should.not.be.eql('test');
-                    return admin.verifyPassword('test').should.eventually.be.true;
+                    admin = _.findWhere(users, {name: 'josh'});
                 })
-                .then(function(){
-                    return done();
-                })
-                .catch(done)
-
+                .then(done)
+            });
+        it('should have encoded password', function(done){
+            admin.accountType.should.be.eql('admin');
+            admin.password.should.not.be.eql('test');
+            admin.verifyPassword('test').should.be.eventually.fulfilled
+                .then(function(){done()})
+        })
+        it('should reject bad password', function(done){
+            admin.verifyPassword('wrong password').should.be.rejected
+                .then(function(){done()})
         });
+        it('change password works', function(done){
+            admin.changePassword('newtest').should.be.eventually.fulfilled
+                .then(function(_admin){
+                    admin = _admin;
+                    admin.password.should.not.be.eql('newtest');
+                    return admin.verifyPassword('newtest').should.be.eventually.fulfilled
+                })
+                .then(function(){done()})
+        });
+        it('prevents leakage', function(done){
+            (admin.toJSON().password === undefined).should.be.ok;
+            done();
+        });
+        it('change name works', function(done){
+            admin.name = 'testy';
+            admin.save()
+                .then(function(_admin){
+                    admin = _admin;
+                    admin.name.should.be.eql('testy');
+                    done();
+                });
+        });
+
     });
 
 });
