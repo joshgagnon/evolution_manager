@@ -1,0 +1,5 @@
+[
+{"name": "test-admin", "password": "test", "accountType": "admin", "email": "test@email.com"},
+{"name": "test-login", "password": "test", "accountType": "client", "email": "testacular@email.com"},
+{"name": "test-staff-create", "password": "test", "accountType": "staff", "email": "teststaffcreate@email.com"}
+]

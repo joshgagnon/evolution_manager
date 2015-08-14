@@ -17,13 +17,12 @@ module.exports = {
     process: function(req, res) {
         passport.authenticate('local', function(err, user, info) {
             if( (err)||(!user) ) {
-                return res.send({
+                return res.send(401, {
                     message: 'login failed'
                 });
-                return res.send(err);
             }
             req.logIn(user, function(err) {
-                return res.send({
+                return res.ok({
                     message: 'login successful'
                 });
             });
@@ -33,7 +32,7 @@ module.exports = {
     logout: function(req, res) {
         req.logOut();
         req.session.destroy(function(){
-        	res.send('logout successful');
+        	res.ok('logout successful');
         });
     }
 };

@@ -1,13 +1,14 @@
 
 
-describe.only('Users Model', function() {
+describe('Users Model', function() {
     describe('Find an Admin, verify Password', function() {
         var admin;
         it('should have more than 0 entries', function(done) {
             User.find()
                 .then(function(users) {
                     users.length.should.not.be.eql(0);
-                    admin = _.findWhere(users, {name: 'josh'});
+                    admin = _.findWhere(users, {name: 'test-admin'});
+                    //admin.should.be.an('object');
                 })
                 .then(done)
             });

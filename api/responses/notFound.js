@@ -23,7 +23,6 @@ module.exports = function notFound (data, options) {
   var req = this.req;
   var res = this.res;
   var sails = req._sails;
-
   // Set status code
   res.status(404);
 

@@ -19,12 +19,12 @@ before(function(done) {
             migrate: 'drop'
         }
     }, function(err, server) {
+        if (err) return done(err);
         sails = server;
         sails.log.info('Sails Lifted');
-        if (err) return done(err);
         var barrels = new Barrels();
         // Populate the DB
-        barrels.populate(['users'], function(err) {
+        barrels.populate(['user'], function(err) {
             done(err);
         });
     });

@@ -14,7 +14,7 @@ var fs = Promise.promisifyAll(require("fs"));
 
 
 module.exports.bootstrap = function(cb) {
-	var loadUsers = fs.readFileAsync('seeds/users.json', 'utf8')
+	/*var loadUsers = fs.readFileAsync('seeds/users.json', 'utf8')
 	.then(JSON.parse)
 	.then(function(data){
 		return Promise.all(data.map(function(data){
@@ -36,5 +36,6 @@ module.exports.bootstrap = function(cb) {
 			    console.log('Found User with name ' + found.pop().name)
 			});
 		})
-		.then(cb)
+		.then(cb)*/
+	cb();
 };
