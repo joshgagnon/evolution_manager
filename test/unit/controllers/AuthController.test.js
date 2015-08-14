@@ -1,6 +1,6 @@
 var request = require('supertest');
 
-describe('Auth Controller', function() {
+describe('AuthController', function() {
 
     describe('#login()', function() {
         var req;
@@ -36,7 +36,7 @@ describe('Auth Controller', function() {
                 .post('/login')
                 .type('form')
                 .field('email', 'testacular@email.com')
-                .field('password', 'test')
+                .field('password', 'testtest')
                 .expect(200, done)
         });
         it('should navigate to protected page', function(done) {

@@ -28,11 +28,11 @@ module.exports = {
             type: 'email',
             required: true,
             unique: true,
-            minLength: 8
         },
         password: {
             type: 'string',
             required: true,
+            minLength: 8
         },
         accountType: {
             type: 'string',

@@ -59,5 +59,9 @@ module.exports.routes = {
   'GET /logout': {
       controller: 'AuthController',
       action: 'logout'
+  },
+  'POST /user/changePassword': {
+    controller: 'UserController',
+    action: 'changePassword'
   }
 };

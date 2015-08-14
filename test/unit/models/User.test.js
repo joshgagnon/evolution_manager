@@ -14,8 +14,8 @@ describe('Users Model', function() {
             });
         it('should have encoded password', function(done){
             admin.accountType.should.be.eql('admin');
-            admin.password.should.not.be.eql('test');
-            admin.verifyPassword('test').should.be.eventually.fulfilled
+            admin.password.should.not.be.eql('testtest');
+            admin.verifyPassword('testtest').should.be.eventually.fulfilled
                 .then(function(){done()})
         })
         it('should reject bad password', function(done){
@@ -23,11 +23,11 @@ describe('Users Model', function() {
                 .then(function(){done()})
         });
         it('change password works', function(done){
-            admin.changePassword('newtest').should.be.eventually.fulfilled
+            admin.changePassword('newtesty').should.be.eventually.fulfilled
                 .then(function(_admin){
                     admin = _admin;
-                    admin.password.should.not.be.eql('newtest');
-                    return admin.verifyPassword('newtest').should.be.eventually.fulfilled
+                    admin.password.should.not.be.eql('newtesty');
+                    return admin.verifyPassword('newtesty').should.be.eventually.fulfilled
                 })
                 .then(function(){done()})
         });

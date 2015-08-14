@@ -26,7 +26,7 @@ describe('UserController', function() {
                 .post('/login')
                 .type('form')
                 .field('email', 'testacular@email.com')
-                .field('password', 'test')
+                .field('password', 'testtest')
                 .expect(200, done)
         });
         it('should fail to create user authenticated as client', function(done) {
@@ -45,7 +45,7 @@ describe('UserController', function() {
                 .post('/login')
                 .type('form')
                 .field('email', 'teststaffcreate@email.com')
-                .field('password', 'test')
+                .field('password', 'testtest')
                 .expect(200, done)
         });
         it('should fail to create invalid users authenticated as staff', function(done) {
@@ -97,6 +97,49 @@ describe('UserController', function() {
                     done();
                 });
         })
+        it('should change password', function(done) {
+            req
+                .post('/user/changePassword')
+                .send({'currentPassword': 'test2', 'newPassword': 'hunter12'})
+                .expect(403)
+                .then(function(res){
+                    return req
+                        .post('/user/changePassword')
+                        .send({'currentPassword': 'testtest', 'newPassword': 'hunter12'})
+                        .expect(200)
+                })
+                .then(function(res){
+                    done();
+                });
+        })
+        it('should logout', function(done) {
+            req
+                .get('/logout')
+                .expect(200, done)
+        });
+        it('should not login successfully with old password', function(done) {
+            req
+                .post('/login')
+                .type('form')
+                .field('email', 'teststaffcreate@email.com')
+                .field('password', 'test')
+                .expect(401, done)
+        });
+        it('should login successfully with new password', function(done) {
+            req
+                .post('/login')
+                .type('form')
+                .field('email', 'teststaffcreate@email.com')
+                .field('password', 'hunter12')
+                .expect(200, done)
+        });
+        it('should change password back', function(done) {
+             req
+                .post('/user/changePassword')
+                .send({'currentPassword': 'hunter12', 'newPassword': 'testtest'})
+                .expect(200, done)
+            });
+
     });
 
 });

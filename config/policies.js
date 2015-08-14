@@ -60,9 +60,13 @@ module.exports.policies = {
         '*': true,
     },
     UserController: {
-      '*': 'staff'
+      '*': 'isStaff',
+      'changePassword': ["authenticated", "isSelf"],
     },
     MatterController: {
-      '*': 'staff'
+      '*': 'isStaff',
+      'find': ["authenticated", "isOwner"],
+      'findOne': ["authenticated", "isOwner"],
+      'create': ["authenticated", "useCurrentUser"]
     },
 };
