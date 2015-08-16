@@ -63,5 +63,14 @@ module.exports.routes = {
   'POST /user/changePassword': {
     controller: 'UserController',
     action: 'changePassword'
+  },
+  'POST /document/uploadDocument': {
+    controller: 'DocumentController',
+    action: 'uploadDocument'
+  },
+  'GET /document/getDocument': {
+    controller: 'DocumentController',
+    action: 'getDocument'
   }
+
 };

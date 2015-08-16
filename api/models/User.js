@@ -53,10 +53,6 @@ module.exports = {
             type: 'boolean',
             defaultsTo: true
         },
-        pending: {
-            type: 'boolean',
-            defaultsTo: true
-        },
         chargeCCAuthority: {
             type: 'boolean',
             defaultsTo: false

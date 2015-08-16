@@ -22,7 +22,17 @@ module.exports = {
    		type: 'string',
    		required: true,
     },
+    pending: {
+        type: 'boolean',
+        defaultsTo: true
+    },
   	matter: { model: 'Matter' },
-  }
+    uploader: { model: 'User' }
+  },
+      toJSON: function() {
+        var obj = this.toObject();
+        delete obj.data;
+        return obj;
+    }
 };
 

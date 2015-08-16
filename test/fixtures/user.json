@@ -2,5 +2,6 @@
 {"name": "test-admin", "password": "testtest", "accountType": "admin", "email": "test@email.com"},
 {"name": "test-login", "password": "testtest", "accountType": "client", "email": "testacular@email.com"},
 {"name": "test-login-different", "password": "testtest", "accountType": "client", "email": "testaculartortion@email.com"},
-{"name": "test-staff-create", "password": "testtest", "accountType": "staff", "email": "teststaffcreate@email.com"}
+{"name": "test-staff-create", "password": "testtest", "accountType": "staff", "email": "teststaffcreate@email.com"},
+{"name": "test-document-uploader", "password": "testtest", "accountType": "staff", "email": "documentuploader@email.com"}
 ]

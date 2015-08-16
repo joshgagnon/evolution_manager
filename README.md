@@ -1,5 +1,7 @@
-EVOLUTION LAW ONLINE MANAGER
+#EVOLUTION LAW ONLINE MANAGER
 
+### Start Server
+npm start
 
-==DB==
-
+### Run Tests
+npm test

@@ -9,7 +9,7 @@ chai.should();
 var sails;
 
 before(function(done) {
-    this.timeout(5000);
+    this.timeout(10000);
     Sails.lift({
         log: {
             level: 'error'
