@@ -8,7 +8,15 @@
  * For more information on bootstrapping your app, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.bootstrap.html
  */
-//var Promise = require("nodegit-promise");
+
+
+require("babel/register")({
+  stage: 0,
+  plugins: ["typecheck"]
+});
+process.chdir(__dirname);
+
+
 var Promise = require("bluebird");
 var fs = Promise.promisifyAll(require("fs"));
 
