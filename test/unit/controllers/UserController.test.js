@@ -97,17 +97,31 @@ describe('UserController', function() {
                     done();
                 });
         })
-        it('should change password', function(done) {
+        it('should attempt change password, fail auth', function(done) {
             req
                 .post('/user/changePassword')
                 .send({'currentPassword': 'test2', 'newPassword': 'hunter12'})
                 .expect(403)
-                .then(function(res){
-                    return req
-                        .post('/user/changePassword')
-                        .send({'currentPassword': 'testtest', 'newPassword': 'hunter12'})
-                        .expect(200)
+                .then(function(){
+                    done();
                 })
+            });
+        it('should fail validation', function(done) {
+
+            req
+                .post('/user/changePassword')
+                .send({'currentPassword': 'testtest', 'newPassword': 'h'})
+                .expect(400)
+                .then(function(){
+                    done();
+                })
+        });
+        it('should succeed validation', function(done) {
+
+            req
+                .post('/user/changePassword')
+                .send({'currentPassword': 'testtest', 'newPassword': 'hunter12'})
+                .expect(200)
                 .then(function(res){
                     done();
                 });

@@ -10,10 +10,22 @@ describe('Error Views', function() {
                 .get('/notfound')
                 .expect(404, done)
         });
-        it('should get model not found', function(done) {
-            req = request.agent(sails.hooks.http.app);
+        it('should login successfully', function(done) {
             req
-                .get('/matters/-1')
+                .post('/login')
+                .type('form')
+                .field('email', 'testacular@email.com')
+                .field('password', 'testtest')
+                .expect(200, done)
+        });
+        it('should get model not found', function(done) {
+            req
+                .get('/matter/-1')
+                .expect(404, done)
+        });
+        it('should get model not found', function(done) {
+            req
+                .get('/matter/x')
                 .expect(404, done)
         });
     });

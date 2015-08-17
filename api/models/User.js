@@ -10,6 +10,15 @@ var SALT_WORK_FACTOR = 10;
 var Promise = require("bluebird");
 var bcrypt = Promise.promisifyAll(require('bcrypt'));
 
+var MIN_PASSWORD = 8;
+
+var validatePassword = function(newPassword){
+    if(!newPassword || newPassword.length < MIN_PASSWORD){
+        throw new sails.config.exceptions.ValidationException("Password must be atleast "+MIN_PASSWORD+" characters");
+    }
+}
+
+
 module.exports = {
 
     attributes: {
@@ -31,8 +40,7 @@ module.exports = {
         },
         password: {
             type: 'string',
-            required: true,
-            minLength: 8
+            required: true
         },
         accountType: {
             type: 'string',
@@ -63,12 +71,16 @@ module.exports = {
         verifyPassword: function(password) {
             return bcrypt.compareAsync(password, this.password)
                .then(function(result){
-                    if(!result) throw 'failed';
+                    if(!result) throw true;
                     return this;
-                }.bind(this));
+                }.bind(this))
+               .catch(function(){
+                    throw new sails.config.exceptions.ForbiddenException('Incorrect Password');
+               })
         },
 
         changePassword: function(newPassword) {
+            validatePassword(newPassword);
             this.newPassword = newPassword;
             return this.save();
         },
@@ -81,6 +93,7 @@ module.exports = {
     },
 
     beforeCreate: function(attrs, cb) {
+        validatePassword(attrs.password);
         bcrypt.hash(attrs.password, SALT_WORK_FACTOR, function(err, hash) {
             attrs.password = hash;
             return cb();
