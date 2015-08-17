@@ -101,5 +101,19 @@ module.exports = {
         } else {
             return cb();
         }
+    },
+    afterCreate: function(updatedRecord, cb){
+        Event.create({type: Event.eventTypes.ACCOUNT_CREATED,
+            client: updatedRecord.id, text: "User Created", data: updatedRecord})
+            .then(function(){
+                cb();
+            })
+    },
+    afterUpdate: function(updatedRecord, cb){
+        Event.create({type: Event.eventTypes.DETAILS_CHANGED,
+            client: updatedRecord.id, text: "User Details changed.", data: updatedRecord})
+            .then(function(){
+                cb();
+            })
     }
 };

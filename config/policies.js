@@ -51,10 +51,7 @@ module.exports.policies = {
 
 
     '*': "authenticated",
-
-    /*UserController: {
-        "create": true,
-    },*/
+    'delete': false,
 
     AuthController: {
         '*': true,
@@ -65,8 +62,16 @@ module.exports.policies = {
     },
     MatterController: {
       '*': 'isStaff',
-      'find': ["authenticated", "isOwner"],
-      'findOne': ["authenticated", "isOwner"],
-      'create': ["authenticated", "useCurrentUser"]
+      'find': ["authenticated", "isClient"],
+      'findOne': ["authenticated", "isClient"],
+      'create': ["authenticated", "useCurrentUser", "defaultPending"]
     },
+    DocumentController: {
+      'uploadDocument': ["authenticated", "isMatterClient"],
+      'getDocument': ["authenticated", "isMatterClient"]
+    },
+    EventController: {
+      '*': false,
+      'getEvents': ["authenticated"]
+    }
 };

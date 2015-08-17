@@ -18,9 +18,9 @@ module.exports = {
             type: 'string',
             required: true,
         },
-        accepted: {
+        pending: {
             type: 'boolean',
-            defaultsTo: false
+            defaultsTo: true
         },
         text: {
             type: 'string'
