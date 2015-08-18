@@ -1,3 +1,4 @@
+import "babel/register";
 import React from "react/addons";
 import Router from "react-router";
 import routes from "./routes";

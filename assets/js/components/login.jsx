@@ -1,19 +1,26 @@
-import React from 'react/addons'
+"use strict";
+import React from 'react/addons';
 import { Input, ButtonInput } from 'react-bootstrap';
-import Request from '../util';
-
+import request from 'superagent-bluebird-promise';
 
 export default class Login extends React.Component {
-    componentDidMount() {
-        console.log('mounted login');
-    }
-    submit(e){
+    state = { error: null };
+    async submit(e) {
     	e.preventDefault();
-    	var result = Request('/login');
-        console.log(result)
+        try{
+        	let result = await request
+                .post('/login')
+                .send({
+                    email:this.refs.email.getValue(),
+                    password: this.refs.password.getValue()})
+            }
+        catch(e){
+            this.setState({error: e.body});
+        }
     }
     render() {
         return <form ref="form" method="post" target="login" onSubmit={::this.submit}>
+            { this.state.error ? <span className="Error">{this.state.error.message}</span> : null }
         	<Input type="text" ref="email" placeholder="Email" />
         	<Input type="password" ref="password" placeholder="Password"/>
         	<ButtonInput type='submit' value='Sign In' />
