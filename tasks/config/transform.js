@@ -5,13 +5,14 @@ module.exports = function(grunt) {
 
 	grunt.config.set('babel', {
         options: {
-            sourceMap: true,
+            sourceMap: 'inline',
+            stage: 0
         },
         dist: {
             files: [{
                     expand: true,
                     cwd: 'assets/js',
-                    src: ['*.jsx', '**/*.jsx'],
+                    src: ['*.jsx', '**/*.jsx','*.js', '**/*.js' ],
                     dest: '.tmp/babel',
                     ext: '.js'
                 }]

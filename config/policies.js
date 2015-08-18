@@ -53,7 +53,7 @@ module.exports.policies = {
     '*': "authenticated",
     'delete': false,
     HomeController: {
-      'home': true
+      'home': ["authenticated"]
     },
     AuthController: {
         '*': true,

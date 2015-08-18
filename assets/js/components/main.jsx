@@ -1,23 +1,17 @@
-
-
 import React from 'react/addons'
+import pureRender from 'pure-render-decorator';
+import Login from './login';
 
-var Main = React.createClass({
+@pureRender
+export default class Main extends React.Component {
+    componentDidMount() {
+        console.log('mounted main')
+    }
 
+    render() {
+        return <div>
+            <Login/>
+        </div>;
+    }
+}
 
-      componentDidMount: function () {
-        console.log('hello');
-      },
-
-
-      render: function () {
-
-        return (
-          <div>
-         </div>
-        )
-      }
-
-  });
-
-module.exports = Main;
