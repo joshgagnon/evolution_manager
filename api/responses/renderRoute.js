@@ -17,9 +17,13 @@ import React from "react";
 import Router from "react-router";
 import routes from '../../assets/js/routes.jsx';
 
-export default function(){
-  Router.run(routes, this.req.url, Handler => {
+export default function(url, data){
+  Router.run(routes, url || this.req.url, Handler => {
+  	/*var flash = this.req.flash('data');
+  	if(flash.length){
+  		data = JSON.parse(flash[0]);
+  	}*/
     let content = React.renderToString(<Handler />);
-    this.res.render('content.ejs', { reactOutput: content, _layoutFile: 'layout.ejs'});
+    this.res.render('content.ejs', { reactOutput: content, user: JSON.stringify(this.req.user), data: JSON.stringify(data), _layoutFile: 'layout.ejs'});
   });
 };

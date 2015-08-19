@@ -22,7 +22,7 @@ passport.use(new LocalStrategy({
             return user.verifyPassword(password);
         })
         .then(function(user){
-            sails.log.info('log in succeeded', user.email);
+            sails.log.info('log in succeeded, password matched', user.email);
             done(null, user);
         })
         .catch(function(error){

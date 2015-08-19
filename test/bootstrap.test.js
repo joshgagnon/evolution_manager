@@ -9,7 +9,7 @@ chai.should();
 var sails;
 
 before(function(done) {
-    this.timeout(10000);
+
     Sails.lift({
         log: {
             level: 'error'
@@ -22,6 +22,7 @@ before(function(done) {
         if (err) return done(err);
         sails = server;
         sails.log.info('Sails Lifted');
+
         var barrels = new Barrels();
         // Populate the DB
         barrels.populate(['user'], function(err) {

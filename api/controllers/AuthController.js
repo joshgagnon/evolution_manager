@@ -11,20 +11,31 @@ var passport = require('passport');
 
 module.exports = {
 
-    login: function(req, res) {
+   /* login: function(req, res) {
         res.renderRoute();
-    },
+    },*/
     process: function(req, res) {
         passport.authenticate('local', function(err, user, info) {
             if( (err)||(!user) ) {
-                return res.send(401, {
-                    message: 'login failed'
-                });
+                let msg = {
+                        message: 'login failed'
+                    }
+                if(req.wantsJSON){
+                    return res.send(401, msg);
+                }else{
+                    req.flash('data', JSON.stringify({login: {error: msg}}));
+                    return res.redirect('/');
+                }
             }
             req.logIn(user, function(err) {
-                return res.ok({
-                    message: 'login successful'
-                });
+                if(req.wantsJSON){
+                    return res.ok({
+                        message: 'login successful'
+                    });
+                }
+                else{
+                    res.redirect('home');
+                }
             });
         }) (req, res);
     },
@@ -32,13 +43,13 @@ module.exports = {
     logout: function(req, res) {
         req.logOut();
         req.session.destroy(function(){
-        	res.ok('logout successful');
+            if(req.wantsJSON){
+        	   res.ok('logout successful');
+            }
+            else{
+                res.redirect('/');
+            }
         });
     }
 };
 
-module.exports.blueprints = {
-    actions: true,
-    rest: true,
-    shortcuts: true
-};

@@ -7,7 +7,7 @@ describe('AuthController', function() {
         it('should fail authorization', function(done) {
             req = request.agent(sails.hooks.http.app);
             req
-                .get('/')
+                .get('/matter')
                 .expect(403, done)
         });
         it('should fail login', function(done) {
@@ -28,7 +28,7 @@ describe('AuthController', function() {
         });
         it('should get login page', function(done) {
             req
-                .get('/login')
+                .get('/')
                 .expect(200, done)
         });
         it('should login successfully', function(done) {
@@ -41,7 +41,7 @@ describe('AuthController', function() {
         });
         it('should navigate to protected page', function(done) {
             req
-                .get('/')
+                .get('/home')
                 .expect(200, done)
         });
         it('should logout', function(done) {
@@ -51,7 +51,7 @@ describe('AuthController', function() {
         });
         it('should fail authorization', function(done) {
             req
-                .get('/')
+                .get('/matter')
                 .expect(403, done)
         });
     });

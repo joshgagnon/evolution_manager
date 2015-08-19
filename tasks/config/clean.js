@@ -13,8 +13,7 @@ module.exports = function(grunt) {
 	var pipeline = require('../pipeline');
 
 	grunt.config.set('clean', {
-		dev: ['.tmp/public/**', '.tmp/babel/**'],
-		es6Build: [pipeline.es6To5BuildPath+'/**'],
+		dev: ['.tmp/public/**'],
 		build: ['www']
 	});
 

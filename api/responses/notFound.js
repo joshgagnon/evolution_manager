@@ -52,7 +52,7 @@ module.exports = function notFound (data, options) {
   // Otherwise try to guess an appropriate view, or if that doesn't
   // work, just send JSON.
   if (options.view) {
-    return res.view(options.view, { data: data });
+    return res.view(options.view, { data: data, _layoutFile: 'layout.ejs'  });
   }
 
   // If no second argument provided, try to serve the default view,

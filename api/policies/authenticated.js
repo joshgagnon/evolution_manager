@@ -1,5 +1,6 @@
+
+
 module.exports = function(req, res, next) {
-	console.log(sails.config.autoreload)
     if(req.isAuthenticated()) {
         return next();
     } else {

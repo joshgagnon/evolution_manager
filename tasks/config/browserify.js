@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       options:{
         browserifyOptions: {
            debug: true
-        }
+        },
       },
       dist: {
         files: {

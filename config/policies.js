@@ -52,12 +52,19 @@ module.exports.policies = {
 
     '*': "authenticated",
     'delete': false,
+
+    LandingController: {
+      'landing': true
+    },
+
     HomeController: {
       'home': ["authenticated"]
     },
+
     AuthController: {
         '*': true,
     },
+
     UserController: {
       '*': 'isStaff',
       'changePassword': ["authenticated", "isSelf"],

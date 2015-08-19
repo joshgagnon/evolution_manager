@@ -1,8 +1,15 @@
-import { Route } from "react-router";
-import React from "react";
+import { Route, DefaultRoute, NotFoundRoute } from 'react-router';
+import React from 'react';
+import Main from './components/main'
+import Landing from './components/landing';
+import Home from './components/home';
 
-import Login from "./components/login";
 
 export default (
-  <Route handler={ Login } path="/login" />
+	<Route handler={Main} path="/">
+	  <Route handler={ Landing } path="" />
+	  <Route handler={ Home } path="home" />
+	  <DefaultRoute handler={ Landing }  />
+	  <NotFoundRoute handler={Landing}/>
+	</Route>
 );

@@ -33,7 +33,7 @@ module.exports = function(grunt) {
 			files: ['assets/js/*', 'assets/js/**/*'],
 
 			// When assets are changed:
-			tasks: ['babelBuild', 'browserify'],
+			tasks: ['babelBuild', 'watchify'],
 			/*options: {
 		      interrupt: true,
 		    }*/

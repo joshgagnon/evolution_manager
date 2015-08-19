@@ -8,7 +8,7 @@ module.exports = function(grunt) {
             sourceMap: 'inline',
             stage: 0
         },
-        dist: {
+        out: {
             files: [{
                     expand: true,
                     cwd: 'assets/js',

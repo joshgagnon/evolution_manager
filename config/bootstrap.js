@@ -14,36 +14,19 @@ require("babel/register")({
   stage: 0,
   plugins: ["typecheck"]
 });
-process.chdir(__dirname);
 
 
 var Promise = require("bluebird");
 var fs = Promise.promisifyAll(require("fs"));
 
-
-module.exports.bootstrap = function(cb) {
-	/*var loadUsers = fs.readFileAsync('seeds/users.json', 'utf8')
-	.then(JSON.parse)
-	.then(function(data){
-		return Promise.all(data.map(function(data){
-			return sails.models.user.create(data);
-		}));
-	})
-	.catch(SyntaxError, function(e) {
-	    sails.log.error("invalid json in file");
-	})
-	.catch(function(e) {
-	    sails.log.error(e, "unable to read file");
-	});
+var Barrels = require("barrels");
 
 
-	loadUsers
-		.then(function(){
-			sails.models.user.find({}).exec(function findCB(err, found){
-			  while (found.length)
-			    console.log('Found User with name ' + found.pop().name)
-			});
-		})
-		.then(cb)*/
-	cb();
+module.exports.bootstrap = function(done) {
+    var barrels = new Barrels();
+    // Populate the DB
+    barrels.populate(['user'], function(err) {
+        done(err);
+    });
+	//done();
 };
